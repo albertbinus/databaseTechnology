@@ -1,0 +1,236 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Oct 22, 2022 at 08:38 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.1.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `binus_online`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activeStudent`
+--
+
+CREATE TABLE `activeStudent` (
+  `nim` varchar(20) NOT NULL,
+  `nisn` int(11) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `placeBirth` varchar(50) DEFAULT NULL,
+  `dateBirth` date DEFAULT NULL,
+  `majorId` varchar(10) DEFAULT NULL,
+  `entranceExamId` int(11) DEFAULT NULL,
+  `studentYear` int(11) DEFAULT NULL,
+  `studentPeriode` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `candidateStudent`
+--
+
+CREATE TABLE `candidateStudent` (
+  `nisn` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `placeBirth` varchar(50) DEFAULT NULL,
+  `dateBirth` date DEFAULT NULL,
+  `highSchoolCategory` varchar(20) DEFAULT NULL,
+  `highSchoolName` varchar(50) DEFAULT NULL,
+  `highSchoolMajor` varchar(50) DEFAULT NULL,
+  `address` varchar(250) DEFAULT NULL,
+  `entranceExamId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classActivity`
+--
+
+CREATE TABLE `classActivity` (
+  `classActivityId` varchar(20) NOT NULL,
+  `studentActivityId` varchar(20) DEFAULT NULL,
+  `classDate` date DEFAULT NULL,
+  `classTime` time DEFAULT NULL,
+  `classRoomId` varchar(20) DEFAULT NULL,
+  `classStatus` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `classRoom`
+--
+
+CREATE TABLE `classRoom` (
+  `classRoomId` varchar(20) NOT NULL,
+  `classRoomName` varchar(20) DEFAULT NULL,
+  `classRoomStatus` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `entranceExam`
+--
+
+CREATE TABLE `entranceExam` (
+  `entranceExamId` int(11) NOT NULL,
+  `targetMajor1` varchar(10) DEFAULT NULL,
+  `targetMajor2` varchar(10) DEFAULT NULL,
+  `examDate` date DEFAULT NULL,
+  `examResult` char(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lecture`
+--
+
+CREATE TABLE `lecture` (
+  `lectureId` varchar(20) NOT NULL,
+  `lectureName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `major`
+--
+
+CREATE TABLE `major` (
+  `majorId` varchar(10) NOT NULL,
+  `majorName` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studyActivity`
+--
+
+CREATE TABLE `studyActivity` (
+  `studyActivityId` varchar(20) NOT NULL,
+  `studyActivityHeaderId` varchar(20) DEFAULT NULL,
+  `subjectId` varchar(20) DEFAULT NULL,
+  `lectureId` varchar(20) DEFAULT NULL,
+  `examValue` float DEFAULT NULL,
+  `examResult` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studyActivityHeader`
+--
+
+CREATE TABLE `studyActivityHeader` (
+  `studyActivityHeaderId` varchar(20) NOT NULL,
+  `nim` varchar(20) DEFAULT NULL,
+  `semester` int(11) DEFAULT NULL,
+  `periode` int(11) DEFAULT NULL,
+  `sks` int(11) DEFAULT NULL,
+  `gradePointPeriode` float DEFAULT NULL,
+  `gradePointAverage` float DEFAULT NULL,
+  `result` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject`
+--
+
+CREATE TABLE `subject` (
+  `subjectId` varchar(20) NOT NULL,
+  `subjectName` varchar(50) DEFAULT NULL,
+  `minimumPoint` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `activeStudent`
+--
+ALTER TABLE `activeStudent`
+  ADD PRIMARY KEY (`nim`);
+
+--
+-- Indexes for table `candidateStudent`
+--
+ALTER TABLE `candidateStudent`
+  ADD PRIMARY KEY (`nisn`);
+
+--
+-- Indexes for table `classActivity`
+--
+ALTER TABLE `classActivity`
+  ADD PRIMARY KEY (`classActivityId`);
+
+--
+-- Indexes for table `classRoom`
+--
+ALTER TABLE `classRoom`
+  ADD PRIMARY KEY (`classRoomId`);
+
+--
+-- Indexes for table `entranceExam`
+--
+ALTER TABLE `entranceExam`
+  ADD PRIMARY KEY (`entranceExamId`);
+
+--
+-- Indexes for table `lecture`
+--
+ALTER TABLE `lecture`
+  ADD PRIMARY KEY (`lectureId`);
+
+--
+-- Indexes for table `major`
+--
+ALTER TABLE `major`
+  ADD PRIMARY KEY (`majorId`);
+
+--
+-- Indexes for table `studyActivity`
+--
+ALTER TABLE `studyActivity`
+  ADD PRIMARY KEY (`studyActivityId`);
+
+--
+-- Indexes for table `studyActivityHeader`
+--
+ALTER TABLE `studyActivityHeader`
+  ADD PRIMARY KEY (`studyActivityHeaderId`);
+
+--
+-- Indexes for table `subject`
+--
+ALTER TABLE `subject`
+  ADD PRIMARY KEY (`subjectId`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
